@@ -1,0 +1,98 @@
+@use './mixin' as *;
+
+html :is(*::before, *::after, *) {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555a53c4;
+  border-radius: 2rem;
+}
+
+::-webkit-scrollbar-track {
+  margin-block: 1rem;
+}
+
+::selection:not(img) {
+  color: var(--clr-accent);
+  background-color: var((--clr-text));
+}
+
+body.dark {
+  @include appColorMode(dark);
+}
+
+body.light {
+  @include appColorMode(light);
+}
+
+body {
+  // min-height: 100vh;
+  // min-height: 100svh;
+  min-block-size: 100lvh;
+  min-block-size: 100vh;
+  font-family: "NeueMontreal-Regular", system-ui, sans-serif;
+  background-color: var(--clr-background);
+  color: var(--clr-text);
+  transition: background-color 300ms ease-out;
+  padding-block: 6em 1px;
+}
+
+:is(a, button) {
+  @include focusEffecte();
+  all: unset;
+  cursor: pointer;
+  transition: opacity 500ms ease-out,
+    box-shadow 300ms ease-out;
+}
+
+button {
+  background-color: var(--clr-accent);
+  position: relative;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:active {
+    transform: scale(.9)
+  }
+}
+
+.btn-style-1 {
+  @include gridOptions(grid, center, null);
+  width: 44px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+
+  svg {
+    width: 25px;
+    stroke: #e2e4e9;
+  }
+}
+
+:is(h1, h2, h3) {
+  text-wrap: balance;
+  font-family: "NeueMontreal-Medium";
+  letter-spacing: 1px;
+}
+
+:is(a, button, input, label, textarea) {
+  user-select: none;
+  font: inherit;
+  outline: none;
+  color: inherit;
+}
+
+svg {
+  width: 24px;
+}

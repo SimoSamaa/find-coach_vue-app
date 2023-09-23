@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "NeueMontreal-Light";
+  src: url("../../assets/font/NeueMontreal-Light.otf") format("opentype");
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NeueMontreal-Regular";
+  src: url("../../assets/font/NeueMontreal-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NeueMontreal-Medium";
+  src: url("../../assets/font/NeueMontreal-Medium.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NeueMontreal-Bold";
+  src: url("../../assets/font/NeueMontreal-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}

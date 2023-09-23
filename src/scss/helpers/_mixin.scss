@@ -1,0 +1,105 @@
+@use './colors' as *;
+
+@mixin darkTheme() {
+
+  @each $color,
+  $value in $darkModeColors {
+    --clr-#{$color}: #{$value};
+  }
+}
+
+@mixin lightTheme() {
+
+  @each $color,
+  $value in $lightModeColors {
+    --clr-#{$color}: #{$value};
+  }
+}
+
+@mixin appColorMode($mode) {
+  @if($mode =="dark") {
+    @media (prefers-color-scheme:dark) {
+      @include darkTheme();
+    }
+
+    @include darkTheme();
+  }
+
+  @else if($mode =="light") {
+    @media (prefers-color-scheme:light) {
+      @include lightTheme();
+    }
+
+    @include lightTheme();
+  }
+}
+
+@mixin flexOptions($fx, $spX, $spY, $siz) {
+  display: $fx;
+  justify-content: $spX;
+  align-items: $spY;
+  gap: $siz;
+}
+
+@mixin gridOptions($gr, $pos, $siz) {
+  display: $gr;
+  place-items: $pos;
+  gap: $siz;
+}
+
+@mixin positionOptions($type, $dir, $x, $y) {
+  position: $type;
+  inset: $dir;
+  transform: translate($x, $y);
+}
+
+@mixin focusEffecte() {
+  &:focus-visible {
+    box-shadow:
+      0 0 0 3px var(--clr-base-card),
+      0px 0px 0 5px var(--clr-accent);
+  }
+}
+
+@mixin theAnimation($name, $dir, $scale) {
+  .#{$name}-enter-active {
+    animation: #{$name} 300ms ease-out forwards;
+  }
+
+  .#{$name}-leave-active {
+    animation: #{$name} 300ms ease-in reverse forwards;
+  }
+
+  @keyframes #{$name} {
+    from {
+      opacity: 0;
+      transform: translateY($dir) scale($scale);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      @content;
+    }
+  }
+}
+
+@mixin breakPoint($deviceSize) {
+  @if ($deviceSize =="large-screen") {
+    @media (max-width:890px) {
+      @content;
+    }
+  }
+
+  @else if ($deviceSize =="medium-screen") {
+    @media (max-width:700px) {
+      @content;
+    }
+  }
+
+  @else if ($deviceSize =="small-screen") {
+    @media (max-width:500px) {
+      @content;
+    }
+  }
+}

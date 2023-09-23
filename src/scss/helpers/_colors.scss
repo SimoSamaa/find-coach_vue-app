@@ -1,0 +1,23 @@
+$lightModeColors: (
+  // light
+  text: #080708,
+  background: #f0eff0,
+  base-card: #ffffff,
+  primary-button: #403a3c,
+  hover-button: #8fc6efd8,
+  accent: #4682b4,
+  error: #E30909,
+  good: #85d685,
+);
+
+$darkModeColors: (
+  // dark
+  text: #e2e4e9,
+  background: #121317,
+  base-card: #1D2226,
+  primary-button: #423e51,
+  hover-button: #231d25,
+  accent: #4c3e51,
+  error: #E9424A,
+  good: #478547,
+);

@@ -1,0 +1,152 @@
+@use './helpers/reset' as *;
+@use './helpers/mixin' as *;
+
+body.light .router-link-active {
+  color: #e2e4e9;
+}
+
+#app-navigation {
+  @mixin extendnav {
+    width: 100%;
+    border-radius: 0;
+    top: 0;
+  }
+
+  &.scroll-active {
+    @include extendnav();
+  }
+
+  @include breakPoint("medium-screen") {
+    @include extendnav();
+  }
+}
+
+body.dark #moon,
+body:not(.dark) #sun {
+  display: none;
+  animation: zaba 300ms ease forwards;
+}
+
+.error #place-holder,
+.error .error-label,
+.error #textarea::placeholder {
+  color: var(--clr-error);
+}
+
+.error::before {
+  animation: errorLin 500ms ease-out forwards;
+}
+
+@keyframes errorLin {
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+// button style secondery
+#btn {
+  padding: 0.5em 1em;
+  position: relative;
+  border-radius: 0.3rem;
+
+  &.btn-delete {
+    background-color: hsl(0, 79%, 72%);
+    color: hsl(0, 79%, 57%);
+  }
+
+  &.btn-action {
+    background-color: hsl(248, 50%, 58%);
+    color: hsl(248, 50%, 35%);
+  }
+
+  svg {
+    display: none;
+    width: 1.2em;
+  }
+
+  @include breakPoint(small-screen) {
+    span {
+      display: none;
+    }
+
+    svg {
+      display: block !important;
+    }
+  }
+}
+
+.base-card {
+  position: relative;
+
+  .empty {
+    @include positionOptions(absolute, 50% auto auto 50%, -50%, -50%);
+    text-align: center;
+  }
+}
+
+.border-style {
+  padding: 1em;
+  border: 1px var(--clr-accent) solid;
+  border-radius: 0.5rem;
+  background-color: #80808014;
+}
+
+// coach card style
+.coach-card {
+  padding: 1.5em 1em !important;
+
+  .user-info {
+    @include flexOptions(flex, space-between, center, .5rem);
+
+    @include breakPoint(small-screen) {
+      flex-direction: column;
+      align-items: start
+    }
+  }
+
+  .user-name-img {
+    @include flexOptions(flex, null, center, 1rem);
+    width: 100%;
+
+    img {
+      width: 45px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background-color: var(--clr-accent);
+      border: 2px solid var(--clr-accent);
+    }
+  }
+
+  .short-description {
+    margin-top: .5rem;
+  }
+
+  .actions {
+    margin-left: auto;
+    max-width: fit-content;
+  }
+}
+
+// loading placeholder
+.expe-placeholder-loading {
+  @include flexOptions(flex, null, null, 1rem);
+  margin-block: 1rem .5rem;
+}
+
+.actions_placeholder-loading {
+  display: flex;
+
+  &>* {
+    margin-right: .5rem;
+  }
+}
+
+// backdrop (filter && dialog)
+.backdrop {
+  @include positionOptions(fixed, 0, null, null);
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+@include theAnimation(backdrop, null, null);
