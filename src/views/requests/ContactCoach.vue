@@ -71,7 +71,7 @@ export default {
       const message = e.target.value;
       this.message.value = message;
       this.resetValue = coun;
-      if (this.message.value.length === 20) this.message.isValid = true;
+      if (this.message.value.length >= 150) this.message.isValid = true;
     },
     checkInputValidation() {
       this.formValid = true;
@@ -84,7 +84,7 @@ export default {
         this.formValid = false;
       }
 
-      if (this.message.value === "" || this.message.value.length < 20) {
+      if (this.message.value === "" || this.message.value.length < 150) {
         this.message.isValid = false;
         this.formValid = false;
       }

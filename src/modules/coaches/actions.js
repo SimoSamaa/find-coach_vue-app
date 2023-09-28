@@ -28,7 +28,9 @@ export default {
       id: userId
     });
   },
-  async loadCoachData(context) {
+  async loadCoachData(context, payload) {
+    if(!payload.importRefresh && !context.getters.importUpdate) return;
+
     const dataUser = await fetch(`${ FIREBASE_LINK }/coaches.json`);
     const allData = await dataUser.json();
 
@@ -50,9 +52,10 @@ export default {
         hourlyRate: allData[ key ].hourlyRate
       };
 
-      coaches.push(coach);
+      coaches.unshift(coach);
     }
 
     context.commit("setCoaches", coaches);
+    context.commit("setLastTimeFetch");
   },
 };

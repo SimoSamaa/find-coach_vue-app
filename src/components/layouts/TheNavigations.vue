@@ -167,12 +167,12 @@ export default {
       this.$store.dispatch("logout");
       this.$router.replace("/auth");
     },
-    async loadDataHeader() {
+    async loadDataHeader(re = false) {
       this.isLoading = true;
       try {
         if (this.isLoggedIn) {
           await this.$store.dispatch("requests/fetchRequests");
-          await this.$store.dispatch("coaches/loadCoachData");
+          await this.$store.dispatch("coaches/loadCoachData", { r: re });
           this.theSelectedCoach = this.$store.getters["coaches/coaches"].find(
             (coach) => coach.id == this.userId
           );

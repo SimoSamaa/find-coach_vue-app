@@ -9,11 +9,10 @@ export default {
   deleteRequest(state, requestId) {
     state.requests = state.requests.filter((req) => req.id !== requestId);
   },
-  delyeAllReq(state) {
+  deleteAllReqs(state) {
     state.requests = [];
   },
   requestsNotification(state) {
-
     console.log('hihi', state.requestsLen);
   }
 };

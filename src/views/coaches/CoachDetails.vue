@@ -159,11 +159,13 @@ export default {
     dialogClose() {
       this.error = null;
     },
-    async loadCoachesDtails() {
+    async loadCoachesDtails(refresh = false) {
       this.isLoading = true;
 
       try {
-        await this.$store.dispatch("coaches/loadCoachData");
+        await this.$store.dispatch("coaches/loadCoachData", {
+          importRefresh: refresh,
+        });
 
         this.theSelectedCoach = this.$store.getters["coaches/coaches"].find(
           (coach) => coach.id === this.id

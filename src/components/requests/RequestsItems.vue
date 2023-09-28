@@ -20,7 +20,7 @@
       </a>
       <div class="controles-req">
         <button id="btn" class="btn-action" @click="handleMessage">
-          <span>{{ !showMessage ? 'Show' : 'Hide' }}</span>
+          <span>{{ !showMessage ? 'open' : 'close' }}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

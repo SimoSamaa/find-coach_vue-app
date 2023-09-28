@@ -99,7 +99,7 @@
     <section>
       <base-card class="base-card">
         <div class="controls">
-          <base-button mode="outline" @click="loadCoaches">
+          <base-button mode="outline" @click="loadCoaches(true)">
             <span class="zaba">Refresh</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -273,10 +273,12 @@ export default {
       this.openSearch = !this.openSearch;
       if (!this.openSearch) this.search = "";
     },
-    async loadCoaches() {
+    async loadCoaches(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch("coaches/loadCoachData");
+        await this.$store.dispatch("coaches/loadCoachData", {
+          importRefresh: refresh,
+        });
       } catch (err) {
         this.error = err || "Something went worng!!";
       } finally {

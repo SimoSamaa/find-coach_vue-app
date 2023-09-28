@@ -39,7 +39,7 @@ export default {
         id: getAllReq[ key ].id,
         userEmail: getAllReq[ key ].userEmail,
         userMessage: getAllReq[ key ].userMessage,
-      }
+      };
 
       requests.unshift(request);
     }
@@ -60,7 +60,8 @@ export default {
     context.commit("deleteRequest", taskId);
   },
   async deleteaAll(context) {
-    const deleteAllReq = await fetch(`${ FIREBASE_LINK }/requests.json`, {
+    const coachId = context.rootGetters.userId;
+    const deleteAllReq = await fetch(`${ FIREBASE_LINK }/requests/${ coachId }.json`, {
       method: "DELETE",
     });
 
@@ -69,6 +70,6 @@ export default {
       throw error;
     }
 
-    context.commit("delyeAllReq", []);
+    context.commit("deleteAllReqs", []);
   }
 };
