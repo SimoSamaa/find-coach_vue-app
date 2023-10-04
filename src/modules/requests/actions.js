@@ -6,6 +6,7 @@ export default {
       id: payload.id,
       userEmail: payload.email,
       userMessage: payload.message,
+      isOpen: false,
     };
 
     const sendReq = await fetch(`${ FIREBASE_LINK }/requests/${ payload.coachId }/request-${ newRequests.id }.json`, {
@@ -39,6 +40,7 @@ export default {
         id: getAllReq[ key ].id,
         userEmail: getAllReq[ key ].userEmail,
         userMessage: getAllReq[ key ].userMessage,
+        isOpen: getAllReq[ key ].isOpen,
       };
 
       requests.unshift(request);
@@ -71,5 +73,24 @@ export default {
     }
 
     context.commit("deleteAllReqs", []);
+  },
+  async changeStateIsOpen(context, { id, isOpen }) {
+    const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
+
+    const updateValue = {
+      isOpen: isOpen,
+    };
+
+    const requpdate = await fetch(`${ FIREBASE_LINK }/requests/${ coachId }/request-${ id }.json?auth=${ token }`, {
+      method: 'PATCH',
+      body: JSON.stringify(updateValue),
+    });
+
+    if(!requpdate.ok) {
+      // error
+    }
+
+    context.commit("setIsOpen", { id, isOpen });
   }
 };

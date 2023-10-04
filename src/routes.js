@@ -24,7 +24,6 @@ const router = createRouter({
       path: '/coaches/:id',
       component: CoachDetails,
       props: true,
-      meta: { zaba: true },
       children: [
         {
           path: 'contact',
@@ -73,17 +72,7 @@ router.beforeEach((to, _, next) => {
     next();
   }
 
-  // const URL_contatc = `http://localhost:8080/coaches/${ to.params.id }/contact/`;
-  // const URL_contatc2 = `http://localhost:8080/coaches/${ to.params.id }/contact`;
-
-  // if(to.meta.zaba && store.getters[ 'coaches/isCoach' ]) return;
-  // if(window.location.href == URL_contatc) {
-  //   location.href = URL_contatc.replace('/contact/', '');
-  // } else if(window.location.href == URL_contatc2) {
-  //   location.href = URL_contatc2.replace('/contact', '');
-  // }
-
-  console.log(store.getters[ 'coaches/isCoach' ]);
+  // console.log(store.getters[ 'coaches/isCoach' ]);
 });
 
 export default router;

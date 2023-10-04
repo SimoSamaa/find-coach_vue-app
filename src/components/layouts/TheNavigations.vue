@@ -39,7 +39,7 @@
           <!-- requests -->
           <li v-if="isLoggedIn && isCoach">
             <router-link to="/requests">requests</router-link>
-            <small v-if="recivedRequests >= 1" class="notification">{{ recivedRequests }}</small>
+            <small v-if="recivedRequests" class="notification">{{ recivedRequests }}</small>
           </li>
           <!-- login/logout -->
           <li class="auth-link">
@@ -140,7 +140,7 @@ export default {
       return this.$store.getters["userId"];
     },
     recivedRequests() {
-      return this.$store.getters["requests/requestsLen"];
+      return this.$store.getters["requests/messagesNotification"];
     },
     isCoach() {
       return this.$store.getters["coaches/isCoach"]; // false

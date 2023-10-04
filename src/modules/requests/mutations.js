@@ -12,7 +12,12 @@ export default {
   deleteAllReqs(state) {
     state.requests = [];
   },
-  requestsNotification(state) {
-    console.log('hihi', state.requestsLen);
+  setIsOpen(state, { id, isOpen }) {
+    const notification = state.requests.find(mess => mess.id === id);
+    if(notification) {
+      if(!notification.isOpen && isOpen) {
+        notification.isOpen = true;
+      }
+    }
   }
 };

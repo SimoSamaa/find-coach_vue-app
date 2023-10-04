@@ -36,10 +36,7 @@ body.light {
 }
 
 body {
-  // min-height: 100vh;
-  // min-height: 100svh;
-  min-block-size: 100lvh;
-  min-block-size: 100vh;
+  min-block-size: 100svh;
   font-family: "NeueMontreal-Regular", system-ui, sans-serif;
   background-color: var(--clr-background);
   color: var(--clr-text);

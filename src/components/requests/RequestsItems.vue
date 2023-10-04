@@ -60,17 +60,34 @@
       </div>
     </div>
     <div class="message-container" :class="{'drop-mess':showMessage }">
-      <p>
-        {{ message }}
-        <span class="req-date">{{ reqSendingTiming }}</span>
-      </p>
+      <p>{{ message }}</p>
+    </div>
+    <div class="req-end">
+      <span class="req-date" style="font-size: 11px;">{{ reqSendingTiming }}</span>
+      <div class="read-state">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          :fill="isOpen ? 'var(--clr-good)' : 'var(--clr-error)'"
+          style="width: 100%;"
+        >
+          <!-- unread -->
+          <path
+            v-if="isOpen"
+            d="m2.394 13.742 4.743 3.62 7.616-8.704-1.506-1.316-6.384 7.296-3.257-2.486zm19.359-5.084-1.506-1.316-6.369 7.279-.753-.602-1.25 1.562 2.247 1.798z"
+          />
+          <!-- read -->
+          <path v-else d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z" />
+        </svg>
+        <BaseBtnhover leftDir="-100%" translateX="0" :hoverText="isOpen ? 'read' : 'unread'" />
+      </div>
     </div>
   </li>
 </template>
 
 <script>
 export default {
-  props: ["id", "email", "message"],
+  props: ["id", "email", "message", "isOpen"],
   emits: ["delete-req"],
   data() {
     return {
@@ -97,13 +114,12 @@ export default {
     },
   },
   methods: {
-    handleMessage() {
+    async handleMessage() {
       this.showMessage = !this.showMessage;
-      // const theOpenMessage = this.recivedRequests.find(
-      //   (mess) => mess.id === this.id
-      // );
-      // console.log(theOpenMessage - this.recivedRequests.length);
-      this.$store.commit("requests/requestsNotification");
+      await this.$store.dispatch("requests/changeStateIsOpen", {
+        id: this.id,
+        isOpen: true,
+      });
     },
   },
 };
@@ -114,6 +130,8 @@ export default {
 
 li {
   margin-top: 1rem;
+  position: relative;
+  padding-bottom: 1.8em;
 
   .coach-email {
     @include flexOptions(flex, space-between, center, 0.5rem);
@@ -155,13 +173,15 @@ li {
 
     p {
       overflow: hidden;
-
-      .req-date {
-        font-size: 10px;
-        margin-left: auto;
-        width: fit-content;
-        display: block;
-      }
+    }
+  }
+  .req-end {
+    @include positionOptions(absolute, auto 1rem 0.2rem auto, null, null);
+    @include flexOptions(flex, null, center, 0.3rem);
+    .read-state {
+      width: 20px;
+      height: 20px;
+      position: relative;
     }
   }
 }

@@ -28,7 +28,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/helpers/mixin";
-$classesHoverBtn: ("search-btn", "filter-btn", "email-contact");
+$classesHoverBtn: ("search-btn", "filter-btn", "email-contact", "read-state");
 
 @each $hoverClass in $classesHoverBtn {
   .#{$hoverClass} {

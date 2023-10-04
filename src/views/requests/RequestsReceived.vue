@@ -40,6 +40,7 @@
             :id="req.id"
             :email="req.userEmail"
             :message="req.userMessage"
+            :is-open="req.isOpen"
           />
         </ul>
         <h3 class="empty" v-else>You havent't received any requeests yet!</h3>

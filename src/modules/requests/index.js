@@ -6,8 +6,9 @@ export default {
   namespaced: true,
   state() {
     return {
+      notifications: 1,
       requests: [],
-    }
+    };
   },
   mutations: requestsMutations,
   actions: requestsActions,
