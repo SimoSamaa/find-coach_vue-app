@@ -28,7 +28,15 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/helpers/mixin";
-$classesHoverBtn: ("search-btn", "filter-btn", "email-contact", "read-state");
+$classesHoverBtn: (
+  "search-btn",
+  "filter-btn",
+  "email-contact",
+  "read-state",
+  "linkedin",
+  "twitter",
+  "instagram"
+);
 
 @each $hoverClass in $classesHoverBtn {
   .#{$hoverClass} {
@@ -47,6 +55,7 @@ $classesHoverBtn: ("search-btn", "filter-btn", "email-contact", "read-state");
       pointer-events: none;
       transition: opacity 300ms ease-out;
       background-color: var(--clr-background);
+      border: 1px var(--clr-accent) solid;
 
       @include breakPoint(medium-screen) {
         display: none;

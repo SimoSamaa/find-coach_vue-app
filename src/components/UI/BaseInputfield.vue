@@ -19,25 +19,21 @@
       <button type="button" :disabled="num >= max" @click="increesTheNumber(++num)">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="#e2e4e9"
-          width="2em"
+          stroke-width="3"
+          stroke="#E2E4E9"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          <path d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
       </button>
       <button type="button" @click="increesTheNumber(--num)" :disabled="!num">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="#e2e4e9"
-          width="2em"
+          stroke-width="3"
+          stroke="#E2E4E9"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+          <path d="M19.5 12h-15" />
         </svg>
       </button>
     </div>

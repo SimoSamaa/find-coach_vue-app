@@ -11,7 +11,10 @@ export default {
       lastName: data.last,
       areas: data.areas,
       description: data.desc,
-      hourlyRate: data.rate
+      hourlyRate: data.rate,
+      linkedin: data.linkedin,
+      twitter: data.twitter,
+      instagram: data.instagram
     };
 
     const sendData = await fetch(`${ FIREBASE_LINK }/coaches/${ userId }.json?auth=${ token }`, {
@@ -49,7 +52,10 @@ export default {
         lastName: allData[ key ].lastName,
         areas: allData[ key ].areas,
         description: allData[ key ].description,
-        hourlyRate: allData[ key ].hourlyRate
+        hourlyRate: allData[ key ].hourlyRate,
+        linkedin: allData[ key ].linkedin,
+        twitter: allData[ key ].twitter,
+        instagram: allData[ key ].instagram
       };
 
       coaches.unshift(coach);

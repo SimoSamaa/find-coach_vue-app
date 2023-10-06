@@ -16,12 +16,7 @@
         </div>
         <!-- start__placeholder-loading -->
         <ul v-if="isLoading">
-          <li
-            v-for="reqLoad in reqsLoad"
-            :key="reqLoad.id"
-            class="border-style"
-            style="margin-top: 1em;"
-          >
+          <li v-for="reqLoad in 3" :key="reqLoad.id" class="border-style" style="margin-top: 1em;">
             <div class="coach-email">
               <BaseSkeletonLoading width="166px" height="40px" smallWidth="100px" />
               <div class="controles-req">
@@ -58,7 +53,6 @@ export default {
   data() {
     return {
       isLoading: false,
-      reqsLoad: 3,
       error: null,
     };
   },

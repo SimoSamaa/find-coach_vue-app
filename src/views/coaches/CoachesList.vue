@@ -148,34 +148,36 @@
           </base-button>
         </div>
         <!-- start__placeholder-loading -->
-        <li class="coach-card border-style" v-if="isLoading">
-          <div class="user-info">
-            <div class="user-name-img" style="flex: 1;">
-              <BaseSkeletonLoading width="45px" height="45px" borderRadius="50%" />
-              <BaseSkeletonLoading width="35%" margin="0" />
+        <ul v-if="isLoading">
+          <li class="coach-card border-style" v-for="loadingNum in 2" :key="loadingNum.id">
+            <div class="user-info">
+              <div class="user-name-img" style="flex: 1;">
+                <BaseSkeletonLoading width="45px" height="45px" borderRadius="50%" />
+                <BaseSkeletonLoading width="35%" margin="0" />
+              </div>
+              <BaseSkeletonLoading width="60px" />
             </div>
-            <BaseSkeletonLoading width="60px" />
-          </div>
-          <br />
-          <p class="description">
-            <BaseSkeletonLoading width="65%" />
-            <BaseSkeletonLoading style="display: none;" width="30%" />
-          </p>
-          <div class="expe-placeholder-loading">
-            <BaseSkeletonLoading width="88px" height="29px" borderRadius="1rem" />
-            <BaseSkeletonLoading width="88px" height="29px" margin="0" borderRadius="1rem" />
-            <BaseSkeletonLoading width="88px" height="29px" margin="0" borderRadius="1rem" />
-          </div>
-          <div class="actions actions_placeholder-loading">
-            <BaseSkeletonLoading
-              width="105px"
-              height="47px"
-              borderRadius="2rem"
-              v-if="isLoggedIn && !isCoach"
-            />
-            <BaseSkeletonLoading width="89px" height="47px" margin="0" borderRadius="2rem" />
-          </div>
-        </li>
+            <br />
+            <p class="description">
+              <BaseSkeletonLoading width="65%" />
+              <BaseSkeletonLoading style="display: none;" width="30%" />
+            </p>
+            <div class="expe-placeholder-loading">
+              <BaseSkeletonLoading width="88px" height="29px" borderRadius="1rem" />
+              <BaseSkeletonLoading width="88px" height="29px" margin="0" borderRadius="1rem" />
+              <BaseSkeletonLoading width="88px" height="29px" margin="0" borderRadius="1rem" />
+            </div>
+            <div class="actions actions_placeholder-loading">
+              <BaseSkeletonLoading
+                width="105px"
+                height="47px"
+                borderRadius="2rem"
+                v-if="isLoggedIn && !isCoach"
+              />
+              <BaseSkeletonLoading width="89px" height="47px" margin="0" borderRadius="2rem" />
+            </div>
+          </li>
+        </ul>
         <!-- end -->
         <ul v-else-if="hasCoaches">
           <coach-items
