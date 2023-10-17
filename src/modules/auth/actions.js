@@ -41,9 +41,9 @@ export default {
       errMess = 'Failed to Authenticate. this user is Already signup';
     } else {
       errMess = 'Failed to Authenticate. Check your login Data';
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
+      // setTimeout(() => {
+      //   location.reload();
+      // }, 1000);
     }
 
     const response = await sendRequest(payload, URL_MODE);

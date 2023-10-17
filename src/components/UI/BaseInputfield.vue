@@ -71,7 +71,7 @@ export default {
     },
     err: {
       type: Object,
-      required: false,
+      required: true,
     },
   },
   data() {
@@ -98,7 +98,12 @@ export default {
       const val = e.target.value;
       e.target.value = val.split(" ").join("");
       this.num = parseInt(val);
-      this.$emit("two-way", val.trim(), this.num);
+      this.$emit("two-way", val.trim(), this.num, this.$refs.userInput.value);
+    },
+  },
+  computed: {
+    isCoach() {
+      return this.$store.getters["coaches/isCoach"];
     },
   },
 };
@@ -123,11 +128,7 @@ export default {
   input {
     width: 100%;
     height: 100%;
-    padding-left: 1em;
-    border: 0;
     border-bottom: 3px solid var(--clr-accent);
-    background-color: #80808014;
-    border-radius: 0.1rem 0.1rem 0 0;
     transition: 300ms background ease-out;
 
     &[type="number"] {

@@ -81,8 +81,6 @@ export default {
       authMode: "login",
       isLoding: false,
       error: null,
-      zaba: "",
-      zaba2: false,
     };
   },
   computed: {
@@ -189,7 +187,6 @@ export default {
       } catch (err) {
         this.error = err || "Failed to authenticate";
       }
-
       this.isLoding = false;
     },
     dialogClose() {

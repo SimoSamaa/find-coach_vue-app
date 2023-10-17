@@ -5,6 +5,25 @@
     </base-dialog>
     <section>
       <base-card class="user-cover">
+        <button
+          v-if="isLoggedIn && isCoach"
+          class="edit-data"
+          @click="this.$router.replace('/update')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="#fff"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+            />
+          </svg>
+        </button>
         <div class="mess-send_pop-up" :class="{'show': popUp}">
           Message Send to Coach
           <svg
@@ -55,8 +74,8 @@
             </div>
             <div class="social-media">
               <a
-                :href="linkedinLink === 'https://' ? '#noLinkDirecton' : linkedinLink"
-                :target="linkedinLink === 'https://' ? '' : '_blanck'"
+                :href="linkedinLink === '' ? '#nolinkedinLink' : linkedinLink"
+                :target="linkedinLink === '' ? '' : '_blanck'"
                 class="linkedin"
               >
                 <BaseBtnhover leftDir="50%" translateX="-50%" hoverText="linkedin" />
@@ -67,8 +86,8 @@
                 </svg>
               </a>
               <a
-                :href="twitterLink === 'https://' ? '#noLinkDirecton' : twitterLink"
-                :target="twitterLink === 'https://' ? '' : '_blanck'"
+                :href="twitterLink === '' ? '#notwitterLink' : twitterLink"
+                :target="twitterLink === '' ? '' : '_blanck'"
                 class="twitter"
               >
                 <BaseBtnhover leftDir="50%" translateX="-50%" hoverText="twitter" />
@@ -79,8 +98,8 @@
                 </svg>
               </a>
               <a
-                :href="instagramLink === 'https://' ? '#noLinkDirecton' : instagramLink"
-                :target="instagramLink === 'https://' ? '' : '_blanck'"
+                :href="instagramLink === '' ? '#noinstagramLink' : instagramLink"
+                :target="instagramLink === '' ? '' : '_blanck'"
                 class="instagram"
               >
                 <BaseBtnhover leftDir="50%" translateX="-50%" hoverText="instagram" />
@@ -220,7 +239,7 @@ export default {
     dialogClose() {
       this.error = null;
     },
-    async loadCoachesDtails(refresh = false) {
+    async loadCoachesDtails(refresh = true) {
       this.isLoading = true;
 
       try {
@@ -261,6 +280,18 @@ export default {
       rgba(203, 196, 196, 0.364)
     );
     height: 150px;
+  }
+  .edit-data {
+    @include positionOptions(absolute, 1em 1em auto auto, null, null);
+    @include gridOptions(grid, center, null);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19);
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px #3b3c3e, 0px 0px 0 5px var(--clr-accent);
+    }
   }
 }
 .main-user-img {

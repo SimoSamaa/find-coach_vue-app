@@ -1,6 +1,6 @@
 import { createApp, defineAsyncComponent } from 'vue';
-import router from './routes'
-import store from './modules/index'
+import router from './routes';
+import store from './modules/index';
 import App from './App.vue';
 
 import './scss/main-style.scss';
@@ -13,10 +13,10 @@ import BaseCheckbox from './components/UI/BaseCheckbox';
 import BaseInputfield from './components/UI/BaseInputfield';
 import BaseTextarea from './components/UI/BaseTextarea';
 
-const BaseDialog = defineAsyncComponent(() => import('./components/UI/BaseDialog'))
-const BaseLoading = defineAsyncComponent(() => import('./components/UI/BaseLoading'))
-const BaseSkeletonLoading = defineAsyncComponent(() => import('./components/UI/BaseSkeletonLoading'))
-const BaseBtnhover = defineAsyncComponent(() => import('./components/UI/BaseBtnhover'))
+const BaseDialog = defineAsyncComponent(() => import('./components/UI/BaseDialog'));
+const BaseLoading = defineAsyncComponent(() => import('./components/UI/BaseLoading'));
+const BaseSkeletonLoading = defineAsyncComponent(() => import('./components/UI/BaseSkeletonLoading'));
+const BaseBtnhover = defineAsyncComponent(() => import('./components/UI/BaseBtnhover'));
 
 const app = createApp(App);
 

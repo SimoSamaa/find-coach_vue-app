@@ -22,9 +22,7 @@ export default {
       body: JSON.stringify(coachData)
     });
 
-    if(!sendData.ok) {
-      // throw Error();
-    }
+    if(!sendData.ok) return;
 
     context.commit('registerCoach', {
       ...coachData,
@@ -63,5 +61,24 @@ export default {
 
     context.commit("setCoaches", coaches);
     context.commit("setLastTimeFetch");
+  },
+  async updateCoach(context, updateCoach) {
+    const userId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
+
+    const req = await fetch(
+      `${ FIREBASE_LINK }/coaches/${ userId }.json?auth=${ token }`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updateCoach),
+      }
+    );
+
+    if(!req.ok) {
+      const error = new Error(req.json().messageb || 'Failed to Update Data!');
+      throw error;
+    }
+
+    context.commit('setUpdateCoach', updateCoach);
   },
 };

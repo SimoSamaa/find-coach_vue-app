@@ -7,6 +7,7 @@
       :maxlength="maxlength"
       :placeholder="placeholder"
       :coun="coun"
+      :value="value"
     ></textarea>
     <div class="description-counter">{{ counterLength }}</div>
   </div>
@@ -33,6 +34,10 @@ export default {
     },
     err: {
       type: Object,
+      required: false,
+    },
+    value: {
+      type: String,
       required: false,
     },
   },

@@ -27,6 +27,14 @@ body:not(.dark) #sun {
   animation: zaba 300ms ease forwards;
 }
 
+// input main global style
+input {
+  background-color: #80808014;
+  border-radius: 0.1rem 0.1rem 0 0;
+  border: 0;
+  padding-left: 1em;
+}
+
 .error #place-holder,
 .error .error-label,
 .error #textarea::placeholder {
@@ -150,3 +158,43 @@ body:not(.dark) #sun {
 }
 
 @include theAnimation(backdrop, null, null);
+
+// upload image UI (register page && update page)
+.upload-img-user {
+  margin-top: 1rem;
+  padding-bottom: 1em;
+  position: relative;
+  @include flexOptions(flex, null, center, 1rem);
+
+  &::before {
+    content: "";
+    @include positionOptions(absolute, auto auto 0 50%, -50%, 0);
+    width: 200%;
+    border-bottom: 1px solid var(--clr-accent);
+  }
+
+  .img-user {
+    width: 100px;
+    height: 100px;
+    background-color: var(--clr-accent);
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 18%);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .btns {
+    margin-bottom: 0.5rem;
+
+    .upload {
+      @include positionOptions(absolute, 0, null, null);
+      cursor: pointer;
+    }
+  }
+}

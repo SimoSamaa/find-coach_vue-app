@@ -1,6 +1,6 @@
 <template>
   <TheNavigation :class="scrollAct" @toggle-mode="changeThemeMode" v-if="showNavigation" />
-  <!-- <PopupConnectionStatus /> -->
+  <PopupConnectionStatus />
   <router-view v-slot="slotProps">
     <transition name="appPage" mode="out-in">
       <component :is="slotProps.Component"></component>

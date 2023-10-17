@@ -226,12 +226,12 @@ export default {
     formValidation() {
       this.formIsValid = true;
 
-      if (this.firstName.value === "") {
+      if (this.firstName.value === "" || this.firstName.value.length < 4) {
         this.firstName.isValid = false;
         this.formIsValid = false;
       }
 
-      if (this.lastName.value === "") {
+      if (this.lastName.value === "" || this.lastName.value.length < 4) {
         this.lastName.isValid = false;
         this.formIsValid = false;
       }
@@ -266,12 +266,6 @@ export default {
           if (!this.formIsValid) return;
       }
 
-      if (this.linkedin.includes("https://")) {
-        this.linkedin = this.linkedin.slice(8);
-        this.twitter = this.twitter.slice(8);
-        this.instagram = this.instagram.slice(8);
-      }
-
       const formData = {
         img: this.userImg,
         first: this.firstName.value,
@@ -280,9 +274,9 @@ export default {
         desc: this.description.value,
         areas: this.areas.value,
         // optionale
-        linkedin: `https://${this.linkedin}`,
-        twitter: `https://${this.twitter}`,
-        instagram: `https://${this.instagram}`,
+        linkedin: this.linkedin,
+        twitter: this.twitter,
+        instagram: this.instagram,
       };
       console.log(formData);
       this.$emit("save-form", formData);
@@ -356,42 +350,6 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/helpers/mixin";
-.upload-img-user {
-  margin-top: 1rem;
-  padding-bottom: 1em;
-  position: relative;
-  @include flexOptions(flex, null, center, 1rem);
-
-  &::before {
-    content: "";
-    @include positionOptions(absolute, auto auto 0 50%, -50%, 0);
-    width: 200%;
-    border-bottom: 1px solid var(--clr-accent);
-  }
-  .img-user {
-    width: 100px;
-    height: 100px;
-    background-color: var(--clr-accent);
-    border-radius: 0.5rem;
-    flex-shrink: 0;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px rgb(0 0 0 / 18%);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-  .btns {
-    margin-bottom: 0.5rem;
-    .upload {
-      @include positionOptions(absolute, 0, null, null);
-      cursor: pointer;
-    }
-  }
-}
-
 .full-name {
   @include gridOptions(grid, null, 1rem);
   margin-bottom: 1rem;

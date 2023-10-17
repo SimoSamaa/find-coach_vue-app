@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 // pages
-import CoachList from './views/coaches/CoachesList';
-const UserAuth = () => import('./views/auth/UserAuth');
-const CoachDetails = () => import('./views/coaches/CoachDetails');
-const CoachRegistration = () => import('./views/coaches/CoachRegistration');
-const ContactCoach = () => import('./views/requests/ContactCoach');
-const RequestsReceived = () => import('./views/requests/RequestsReceived');
-const NotFound = () => import('./views/NotFound');
+import CoachList from '@/views/coaches/CoachesList';
+const UserAuth = () => import('@/views/auth/UserAuth');
+const CoachDetails = () => import('@/views/coaches/CoachDetails');
+const CoachRegistration = () => import('@/views/coaches/CoachRegistration');
+const ContactCoach = () => import('@/views/requests/ContactCoach');
+const RequestsReceived = () => import('@/views/requests/RequestsReceived');
+const CoachUpdate = () => import('@/views/coaches/CoachUpdate');
+const NotFound = () => import('@/views/NotFound');
 
 const router = createRouter({
   history: createWebHistory(),
@@ -41,6 +42,11 @@ const router = createRouter({
     {
       path: "/requests",
       component: RequestsReceived,
+      meta: { requireCoach: true }
+    },
+    {
+      path: '/update',
+      component: CoachUpdate,
       meta: { requireCoach: true }
     },
     {
