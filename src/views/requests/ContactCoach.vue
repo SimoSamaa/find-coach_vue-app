@@ -16,6 +16,7 @@
       :coun="resetValue || 0"
       @two-way="desc"
       :err="{error: !message.isValid}"
+      :value="message.value"
     />
 
     <p v-if="!formValid">Please complete all required fields.</p>

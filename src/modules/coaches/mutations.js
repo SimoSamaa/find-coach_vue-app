@@ -8,7 +8,4 @@ export default {
   setLastTimeFetch(state) {
     state.lastFetch = new Date().getTime();
   },
-  setUpdateCoach() {
-    // 
-  },
 };

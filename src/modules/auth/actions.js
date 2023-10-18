@@ -1,7 +1,6 @@
 const WEB_KEY = 'AIzaSyC25_gQSyeh-fi0xaO17DYDqaLtoWv5IvQ';
 const SIGNUP_LINK = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
 const LOGIN_LINK = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
-// const FIREBASE_LINK = 'https://test-coaches-find-default-rtdb.europe-west1.firebasedatabase.app';
 
 let timer = null; // clear time
 
@@ -41,9 +40,6 @@ export default {
       errMess = 'Failed to Authenticate. this user is Already signup';
     } else {
       errMess = 'Failed to Authenticate. Check your login Data';
-      // setTimeout(() => {
-      //   location.reload();
-      // }, 1000);
     }
 
     const response = await sendRequest(payload, URL_MODE);

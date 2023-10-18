@@ -103,17 +103,9 @@
         </div>
         <base-button :disabled="disabledBtnUpload" class="update-btn" type="submit" id="btn">
           <span>Update</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+              d="M6 22h12a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2zm7-18 5 5h-5V4zM8 14h3v-3h2v3h3v2h-3v3h-2v-3H8v-2z"
             />
           </svg>
         </base-button>
@@ -253,11 +245,7 @@ export default {
         this.formIsValid = false;
       }
     },
-    hello() {
-      console.log("hello");
-    },
     async submitUpdateData() {
-      this.hello();
       this.formValidation();
 
       switch (!this.formIsValid) {

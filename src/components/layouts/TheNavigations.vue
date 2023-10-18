@@ -128,6 +128,7 @@ export default {
       theSelectedCoach: null,
       isOpen: false,
       isLoading: false,
+      controleFetch: true,
     };
   },
   computed: {
@@ -167,18 +168,26 @@ export default {
       this.$store.dispatch("logout");
       this.$router.replace("/auth");
     },
+    async upcamingsMess() {
+      try {
+        if (!this.isLoggedIn) return;
+        await this.$store.dispatch("requests/fetchRequests");
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async loadDataHeader(re = false) {
       this.isLoading = true;
+
       try {
-        if (this.isLoggedIn) {
-          await this.$store.dispatch("requests/fetchRequests");
-          await this.$store.dispatch("coaches/loadCoachData", { r: re });
-          this.theSelectedCoach = this.$store.getters["coaches/coaches"].find(
-            (coach) => coach.id == this.userId
-          );
-          // console.log(this.theSelectedCoach.id);
-          // console.log(this.userId);
-        }
+        if (!this.isLoggedIn) return;
+        await this.$store.dispatch("requests/fetchRequests");
+        await this.$store.dispatch("coaches/loadCoachData", {
+          r: re,
+        });
+        this.theSelectedCoach = this.$store.getters["coaches/coaches"].find(
+          (coach) => coach.id == this.userId
+        );
       } catch (err) {
         console.error(err);
       } finally {
@@ -187,7 +196,15 @@ export default {
     },
   },
   created() {
-    this.loadDataHeader();
+    setInterval(() => {
+      if (!this.isLoggedIn) return;
+      if (this.controleFetch) {
+        this.loadDataHeader();
+        this.controleFetch = false;
+      }
+    }, 100);
+
+    setInterval(() => this.upcamingsMess(), 10000);
   },
 };
 </script>

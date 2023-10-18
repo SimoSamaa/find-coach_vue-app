@@ -6,7 +6,7 @@
     <section>
       <base-card class="user-cover">
         <button
-          v-if="isLoggedIn && isCoach"
+          v-if="isLoggedIn && isCoach && coachLogin"
           class="edit-data"
           @click="this.$router.replace('/update')"
         >
@@ -181,11 +181,18 @@ export default {
       popUp: false,
       isLoading: false,
       error: null,
+      controleFetch: true,
     };
   },
   computed: {
+    coachLogin() {
+      return this.userId == this.id;
+    },
     isLoggedIn() {
       return this.$store.getters.isAuth;
+    },
+    userId() {
+      return this.$store.getters.userId;
     },
     showConatctBtn() {
       return this.$route.name != "contactBtn";
@@ -239,9 +246,14 @@ export default {
     dialogClose() {
       this.error = null;
     },
+    zaba() {
+      if (this.coachLogin) {
+        this.loadCoachesDtails();
+        console.log("zaba");
+      }
+    },
     async loadCoachesDtails(refresh = true) {
       this.isLoading = true;
-
       try {
         await this.$store.dispatch("coaches/loadCoachData", {
           importRefresh: refresh,
@@ -250,6 +262,8 @@ export default {
         this.theSelectedCoach = this.$store.getters["coaches/coaches"].find(
           (coach) => coach.id === this.id
         );
+
+        this.error = null;
       } catch (err) {
         this.error = err || "Something went worng!!";
       } finally {
@@ -259,6 +273,14 @@ export default {
   },
   created() {
     this.loadCoachesDtails();
+
+    setInterval(() => {
+      if (!this.coachLogin) return;
+      if (this.controleFetch) {
+        this.loadCoachesDtails();
+        this.controleFetch = false;
+      }
+    });
   },
 };
 </script>
