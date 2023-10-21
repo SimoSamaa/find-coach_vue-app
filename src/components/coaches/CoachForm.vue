@@ -2,7 +2,7 @@
   <form @submit.prevent="submitForm">
     <div class="upload-img-user">
       <div class="img-user">
-        <img :src="userImg || require('@/assets/icon/user-icon.svg')" alt="upload-img" />
+        <img :src="userImg || require('@/assets/icon/user-icon.svg')" alt="user-img" />
       </div>
       <div class="btn-controls">
         <div class="btns">

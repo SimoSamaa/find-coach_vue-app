@@ -3,7 +3,7 @@
     <!-- user-img-profile -->
     <BaseSkeletonLoading v-if="isLoading" height="40px" width="40px" borderRadius="50%" />
     <div v-else-if="isCoach" @click="mainUserProfile" class="profile-coach">
-      <img :src="userImg" alt="img-profile" />
+      <img :src="userImg" alt="user-img" />
     </div>
     <!-- logo -->
     <router-link v-else to="/coaches" class="logo">

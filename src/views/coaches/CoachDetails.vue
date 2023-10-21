@@ -59,10 +59,10 @@
         <!-- end -->
         <div v-else>
           <div class="profile-img">
-            <img :src="userImg" alt="img-user" class="main-user-img" @click="openFullImg = true" />
+            <img :src="userImg" alt="user-img" class="main-user-img" @click="openFullImg = true" />
             <transition name="backdrop">
               <div v-if="openFullImg" class="full-user-img_container" @click="openFullImg = false">
-                <img :src="userImg" alt="full-img" class="full-user-img" @click.stop />
+                <img :src="userImg" alt="user-img" class="full-user-img" @click.stop />
               </div>
             </transition>
           </div>

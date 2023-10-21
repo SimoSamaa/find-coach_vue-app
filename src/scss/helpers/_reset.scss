@@ -93,3 +93,7 @@ button {
 svg {
   width: 24px;
 }
+
+img[alt='user-img'] {
+  object-fit: cover;
+}

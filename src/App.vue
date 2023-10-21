@@ -6,16 +6,19 @@
       <component :is="slotProps.Component"></component>
     </transition>
   </router-view>
+  <ScrollBtnProgress />
 </template>
 
 <script>
-import TheNavigation from "./components/layouts/TheNavigations";
-import PopupConnectionStatus from "./components/PopupConnectionStatus";
+import TheNavigation from "@/components/layouts/TheNavigations";
+import PopupConnectionStatus from "@/components/PopupConnectionStatus";
+import ScrollBtnProgress from "@/components/ScrollBtnProgress";
 
 export default {
   components: {
     TheNavigation,
     PopupConnectionStatus,
+    ScrollBtnProgress,
   },
   data() {
     return {
