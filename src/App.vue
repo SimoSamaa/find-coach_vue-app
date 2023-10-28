@@ -6,7 +6,7 @@
       <component :is="slotProps.Component"></component>
     </transition>
   </router-view>
-  <ScrollBtnProgress />
+  <ScrollBtnProgress v-if="scrollProgress" />
 </template>
 
 <script>
@@ -51,6 +51,9 @@ export default {
   computed: {
     showNavigation() {
       return this.$route.name !== "NotFound";
+    },
+    scrollProgress() {
+      return this.$route.name === "coaches";
     },
   },
   methods: {

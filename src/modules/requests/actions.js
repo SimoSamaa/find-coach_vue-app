@@ -87,9 +87,7 @@ export default {
       body: JSON.stringify(updateValue),
     });
 
-    if(!requpdate.ok) {
-      // error
-    }
+    if(!requpdate.ok) return;
 
     context.commit("setIsOpen", { id, isOpen });
   }

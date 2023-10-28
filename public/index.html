@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="description" content="Find a cooch and grow your skills">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="icon">
   <title>
     Find a Coach
   </title>
@@ -19,6 +19,22 @@
   </noscript>
   <div id="app"></div>
   <!-- built files will be auto injected -->
+  <script>
+    const favicon = document.querySelector('link[rel="icon"]');
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme:light)");
+
+    function handledFaviconMode(e) {
+      if(e.matches) {
+        favicon.href = './favicon-light.png';
+      } else {
+        favicon.href = './favicon-dark.png';
+      }
+    };
+
+
+    handledFaviconMode(darkModeMediaQuery);
+    darkModeMediaQuery.addListener(handledFaviconMode);
+  </script>
 </body>
 
 </html>

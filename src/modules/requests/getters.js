@@ -12,5 +12,9 @@ export default {
     return Object.values(state.requests).reduce((total, message) => {
       return total + (message.isOpen ? 0 : state.notifications);
     }, 0);
+  },
+  notificationMess(state) {
+    const notificationEmail = Array.from(Object.values(state.requests));
+    return notificationEmail[ 0 ].userEmail;
   }
 };
