@@ -81,6 +81,7 @@
       :coun="resetValue || 0"
       @two-way="desc"
       :err="{error: !description.isValid}"
+      :value="description.value"
     />
     <div class="social-media">
       <p

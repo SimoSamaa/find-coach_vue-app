@@ -114,7 +114,7 @@
         </div>
 
         <base-button
-          v-if="showConatctBtn && !isCoach"
+          v-if="contactRoute && !isCoach"
           @click="checkBtnContact = false"
           class="contact-btn"
           link
@@ -133,11 +133,13 @@
             />
           </svg>
         </base-button>
-        <router-view v-slot="slotProps" @popup-mess="showPopupMess" v-if="!isCoach">
-          <transition name="contact" mode="out-in">
-            <component :is="slotProps.Component"></component>
-          </transition>
-        </router-view>
+        <div v-if="!isCoach">
+          <router-view v-if="addCommenttRoute" v-slot="slotProps" @popup-mess="showPopupMess">
+            <transition name="contact" mode="out-in">
+              <component :is="slotProps.Component"></component>
+            </transition>
+          </router-view>
+        </div>
       </base-card>
     </section>
 
@@ -167,12 +169,51 @@
         <base-expe v-else v-for="area in areas" :key="area.id" :title="area" :type="area"></base-expe>
       </base-card>
     </section>
+
+    <section>
+      <base-card>
+        <base-button
+          class="btn-add-comment"
+          v-if="addCommenttRoute && !isCoach && isLoggedIn && !isCommented"
+          link
+          :to="'/coaches/' + id + '/comment'"
+        >Add comment</base-button>
+        <div v-if="!isCoach">
+          <router-view v-if="contactRoute && !isCommented" name="comment" v-slot="slotProps">
+            <transition name="contact" mode="out-in">
+              <component :is="slotProps.Component"></component>
+            </transition>
+          </router-view>
+        </div>
+        <div class="display-comments">
+          <div class="comments-head">
+            <h2>Comments</h2>
+            <div>{{ commentsLength }} comments</div>
+          </div>
+          <ul v-if="hasComments">
+            <coach-comments
+              v-for="comm in comments"
+              :key="comm.id"
+              :comment-name="comm.name"
+              :comment-date="comm.date"
+              :comment="comm.comment"
+            ></coach-comments>
+          </ul>
+          <h3 v-else class="no-comments">No comments</h3>
+        </div>
+      </base-card>
+    </section>
   </main>
 </template>
 
 <script>
+import CoachComments from "@/components/comments/CoachComments";
+
 export default {
   props: ["id"],
+  components: {
+    CoachComments,
+  },
   data() {
     return {
       theSelectedCoach: null,
@@ -185,6 +226,24 @@ export default {
     };
   },
   computed: {
+    comments() {
+      return this.$store.getters["comments/comments"];
+    },
+    commentsLength() {
+      return this.$store.getters["comments/commentsLength"];
+    },
+    hasComments() {
+      return this.$store.getters["comments/hasComments"];
+    },
+    isCommented() {
+      return this.$store.getters["comments/isCommented"];
+    },
+    contactRoute() {
+      return this.$route.name !== "contactBtn";
+    },
+    addCommenttRoute() {
+      return this.$route.name !== "commentBtn";
+    },
     coachLogin() {
       return this.userId == this.id;
     },
@@ -193,9 +252,6 @@ export default {
     },
     userId() {
       return this.$store.getters.userId;
-    },
-    showConatctBtn() {
-      return this.$route.name != "contactBtn";
     },
     hasRequests() {
       return this.$store.getters["requests/hasRequests"];
@@ -230,7 +286,8 @@ export default {
       return this.theSelectedCoach?.instagram;
     },
     coachContactLink() {
-      return `${this.$route.path}/contact`;
+      // return `${this.$route.path}/contact`;
+      return "/coaches/" + this.id + "/contact";
     },
     authContactLink() {
       return `/auth?redCont=${this.$route.path.slice(1)}/contact`;
@@ -249,7 +306,6 @@ export default {
     zaba() {
       if (this.coachLogin) {
         this.loadCoachesDtails();
-        console.log("zaba");
       }
     },
     async loadCoachesDtails(refresh = true) {
@@ -270,9 +326,14 @@ export default {
         this.isLoading = false;
       }
     },
+    async loadComments() {
+      const coachId = this.$route.params.id;
+      await this.$store.dispatch("comments/fetchComments", coachId);
+    },
   },
   created() {
     this.loadCoachesDtails();
+    this.loadComments();
 
     setInterval(() => {
       if (!this.coachLogin) return;
@@ -374,6 +435,32 @@ export default {
 .loading-mobile {
   @include breakPoint(medium-screen) {
     display: block !important;
+  }
+}
+.btn-add-comment {
+  width: 100%;
+  text-align: center;
+  padding-inline: 0;
+  margin: 0 0 1rem 0;
+}
+
+.display-comments {
+  .comments-head {
+    @include flexOptions(flex, space-between, center, null);
+
+    div {
+      text-decoration: underline 2px;
+      text-underline-offset: 5px;
+    }
+  }
+
+  ul {
+    @include gridOptions(grid, null, 1rem);
+    margin-top: 1rem;
+  }
+  .no-comments {
+    text-align: center;
+    margin-top: 1em;
   }
 }
 

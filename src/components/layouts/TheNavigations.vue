@@ -204,7 +204,7 @@ export default {
           if (perm === "granted") {
             const message = new Notification("Receiving Messagec From", {
               body: this.notificationMess,
-              icon: require("../../../public/favicon-light.png"),
+              icon: require("../../../public/favIcon-light.png"),
             });
 
             message.onclick = () => {

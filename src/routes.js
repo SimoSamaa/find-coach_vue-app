@@ -8,6 +8,7 @@ const CoachRegistration = () => import('@/views/coaches/CoachRegistration');
 const ContactCoach = () => import('@/views/requests/ContactCoach');
 const RequestsReceived = () => import('@/views/requests/RequestsReceived');
 const CoachUpdate = () => import('@/views/coaches/CoachUpdate');
+const AddComment = () => import('@/views/comments/AddComment');
 const NotFound = () => import('@/views/NotFound');
 
 const router = createRouter({
@@ -29,10 +30,16 @@ const router = createRouter({
       children: [
         {
           path: 'contact',
-          component: ContactCoach,
+          components: { default: ContactCoach, comment: AddComment },
           meta: { requireStudent: true },
           name: "contactBtn",
-        } // coaches/id/contact
+        }, // coaches/id/contact
+        {
+          path: 'comment',
+          components: { default: ContactCoach, comment: AddComment },
+          meta: { requireStudent: true },
+          name: "commentBtn",
+        }, // coaches/id/comment
       ]
     },
     {
